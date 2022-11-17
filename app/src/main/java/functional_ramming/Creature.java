@@ -6,7 +6,7 @@ public class Creature {
     private double speed;
     private double size;
 
-    public Creature(Vector p, Vector d, double sp, double sz, Vector b) {
+    public Creature(Vector p, Vector d, double sp, double sz) {
         pos = p;
         dir = d;
         speed = sp;
@@ -22,14 +22,15 @@ public class Creature {
     }
 
     public void step() {
-        Vector newPos = pos.add(dir);
-        if (newPos.getX() + size > 400) {
+        Vector step = dir.scale(speed);
+        Vector newPos = pos.add(step);
+        if (newPos.getX() + size > 400 || newPos.getX() - size < 0) {
             dir.setX(-dir.getX());
-            newPos = pos.add(dir);
         }
-        if (newPos.getY() + size > 300) {
+        if (newPos.getY() + size > 300 || newPos.getY() - size < 0) {
             dir.setY(-dir.getY());
-            newPos = pos.add(dir);
         }
+        step = dir.scale(speed);
+        pos = pos.add(step);
     }
 }

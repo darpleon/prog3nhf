@@ -12,7 +12,9 @@ public class App {
 
         while (g != null) {
             g.writeSize();
-            TimeUnit.MILLISECONDS.sleep(100);
+            g.c.step();
+            g.repaint();
+            //TimeUnit.MILLISECONDS.sleep(1000 / 60);
         }
 
     }
