@@ -15,6 +15,7 @@ public class GameFrame extends JFrame {
         wlabel = new JLabel();
         this.add(hlabel,BorderLayout.WEST);
         this.add(wlabel,BorderLayout.EAST);
+        this.add(new StagePanel(), BorderLayout.CENTER); 
 
         this.pack();
         this.setVisible(true);
