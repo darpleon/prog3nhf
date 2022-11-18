@@ -3,19 +3,34 @@
  */
 package functional_ramming;
 
+import java.awt.BorderLayout;
 import java.util.concurrent.TimeUnit;
 
 public class App {
 
     public static void main(String[] args) throws Exception {
-        GameFrame g = new GameFrame();
+        GameFrame f = new GameFrame();
 
-        while (g != null) {
-            g.writeSize();
-            g.c.step();
-            g.repaint();
-            //TimeUnit.MILLISECONDS.sleep(1000 / 60);
-        }
+        Arena a = new Arena();
+        
+        Vector pos = new Vector(50, 250);
+        Vector dir = new Vector(4.0 / 5.0, 3.0 / 5.0);
+        double speed = 10;
+        double size = 20;
+        Creature c = new Creature(pos, dir, speed, size);
+        a.addCreature(c);
+
+        ArenaPanel ap = new ArenaPanel(a);
+
+        f.add(ap, BorderLayout.CENTER); 
+
+        f.pack();
+        f.setVisible(true);
+
+        GameLoop gl = new GameLoop(a, ap);
+
+        gl.run();
+        
 
     }
 }
