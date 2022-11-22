@@ -33,4 +33,16 @@ public class Vector {
         return new Vector(x * m, y * m);
     }
 
+    public Vector swap() {
+        return new Vector(y, x);
+    }
+
+    public Vector flip() {
+        return new Vector(x, -y);
+    }
+
+    public double dotProduct(Vector v) {
+        return x * v.x + y * v.y;
+    }
+
 }

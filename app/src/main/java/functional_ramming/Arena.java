@@ -3,9 +3,10 @@ package functional_ramming;
 import java.util.*;
 
 public class Arena implements Iterable<Creature> {
+    public static final double WIDTH = 800;
+    public static final double HEIGHT = 600;
+
     private final List<Creature> creatures;
-    private static final double width = 400;
-    private static final double height = 300;
 
     public Iterator<Creature> iterator() {
         return creatures.iterator();

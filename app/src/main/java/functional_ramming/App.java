@@ -4,7 +4,6 @@
 package functional_ramming;
 
 import java.awt.BorderLayout;
-import java.util.concurrent.TimeUnit;
 
 public class App {
 
@@ -15,12 +14,18 @@ public class App {
         
         Vector pos = new Vector(50, 250);
         Vector dir = new Vector(4.0 / 5.0, 3.0 / 5.0);
-        double speed = 10;
+        double speed = 5;
         double size = 20;
-        Creature c = new Creature(pos, dir, speed, size);
-        a.addCreature(c);
+        //Creature c = new Creature(pos, dir, speed, size);
+        //a.addCreature(c);
+
+        Rambda r = new Rambda(pos, dir, size, 6);
+        RambdaController rc = new RambdaController(r);
+
+        a.addCreature(r);
 
         ArenaPanel ap = new ArenaPanel(a);
+        f.addKeyListener(rc);
 
         f.add(ap, BorderLayout.CENTER); 
 
@@ -31,6 +36,5 @@ public class App {
 
         gl.run();
         
-
     }
 }
