@@ -12,31 +12,31 @@ public class Creature {
 
     }
 
-    public Creature(Vector p, Vector d, double sp, double sz) {
-        pos = p;
-        dir = d;
-        speed = sp;
-        size = sz;
+    public Creature(Vector pos, Vector dir, double speed, double size) {
+        this.pos = pos;
+        this.dir = dir;
+        this.speed = speed;
+        this.size = size;
     }
 
     public Vector getPos() {
-        return pos;
+        return this.pos;
     }
 
     public double getSize() {
-        return size;
+        return this.size;
     }
 
     public void step() {
-        Vector step = dir.scale(speed);
-        Vector newPos = pos.add(step);
-        if (newPos.getX() + size > Arena.WIDTH || newPos.getX() - size < 0) {
-            dir.setX(-dir.getX());
+        Vector step = this.dir.scale(speed);
+        Vector newPos = this.pos.add(step);
+        if (newPos.getX() + this.size > Arena.WIDTH || newPos.getX() - this.size < 0) {
+            this.dir.setX(-this.dir.getX());
         }
-        if (newPos.getY() + size > Arena.HEIGHT || newPos.getY() - size < 0) {
-            dir.setY(-dir.getY());
+        if (newPos.getY() + this.size > Arena.HEIGHT || newPos.getY() - this.size < 0) {
+            this.dir.setY(-this.dir.getY());
         }
-        step = dir.scale(speed);
-        pos = pos.add(step);
+        step = this.dir.scale(speed);
+        this.pos = this.pos.add(step);
     }
 }

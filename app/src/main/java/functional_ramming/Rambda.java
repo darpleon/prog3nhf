@@ -5,7 +5,7 @@ public class Rambda extends Creature {
     private Vector turnDelta;
     
     public Rambda(Vector p, Vector d, double sz, double angleDelta/*, Function f*/) {
-        super(p, d, 10, sz);
+        super(p, d, 5, sz);
         double angleDeltaRad = Math.toRadians(angleDelta);
         turnDelta = new Vector(Math.cos(angleDeltaRad), Math.sin(angleDeltaRad));
         turnDir = TurnDir.NONE;
@@ -15,6 +15,7 @@ public class Rambda extends Creature {
         turnDir = td;
     }
 
+    @Override
     public void step() {
         if (turnDir != TurnDir.NONE) {
             double newX = 1;

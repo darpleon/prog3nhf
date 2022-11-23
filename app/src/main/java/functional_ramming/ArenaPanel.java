@@ -6,9 +6,11 @@ import javax.swing.*;
 public class ArenaPanel extends JPanel {
 
     private final Arena a;
+    private final double aspectRatio;
 
     public ArenaPanel(Arena arena) {
         a = arena;
+        aspectRatio = a.WIDTH / a.HEIGHT;
     }
 
     @Override

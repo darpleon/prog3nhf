@@ -4,6 +4,7 @@
 package functional_ramming;
 
 import java.awt.BorderLayout;
+import java.util.*;
 
 public class App {
 
@@ -14,15 +15,16 @@ public class App {
         
         Vector pos = new Vector(50, 250);
         Vector dir = new Vector(4.0 / 5.0, 3.0 / 5.0);
-        double speed = 5;
+        double speed = 2;
         double size = 20;
-        //Creature c = new Creature(pos, dir, speed, size);
-        //a.addCreature(c);
 
         Rambda r = new Rambda(pos, dir, size, 6);
         RambdaController rc = new RambdaController(r);
 
         a.addCreature(r);
+
+        Chaser c = new Chaser(pos, speed, size, r, new ArrayList<Creature>());
+        a.addCreature(c);
 
         ArenaPanel ap = new ArenaPanel(a);
         f.addKeyListener(rc);
