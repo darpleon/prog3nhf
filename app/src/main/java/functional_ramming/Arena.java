@@ -2,28 +2,44 @@ package functional_ramming;
 
 import java.util.*;
 
-public class Arena implements Iterable<Creature> {
-    public static final double WIDTH = 800;
-    public static final double HEIGHT = 600;
+public class Arena implements Iterable<Chaser> {
+    public static final double WIDTH = 1600;
+    public static final double HEIGHT = 900;
 
-    private final List<Creature> creatures;
+    private Function function;
+    private Rambda rambda;
+    private List<Chaser> chasers;
 
-    public Iterator<Creature> iterator() {
-        return creatures.iterator();
+    public Iterator<Chaser> iterator() {
+        return chasers.iterator();
     }
 
     public Arena() {
-        creatures = new ArrayList<Creature>();
+        chasers = new ArrayList<Chaser>();
     }
 
-    public void addCreature(Creature c) {
-        creatures.add(c);
+    public void setRambda(Rambda rambda) {
+        this.rambda = rambda;
+    }
+
+    public Rambda getRambda() {
+        return this.rambda;
+    }
+
+    public void addChaser(Chaser chaser) {
+        chasers.add(chaser);
+    }
+
+    public void setFunction(Function function) {
+        this.function = function;
     }
 
     public void update() {
-        for (Creature c: creatures) {
+        rambda.step();
+        for (Chaser c: chasers) {
             c.step();
         }
+        function.step();
     }
 
 }

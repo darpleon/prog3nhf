@@ -21,7 +21,8 @@ public class ArenaPanel extends JPanel {
         g.setColor(Color.RED);
         g.fillOval(100, 100, 100, 100);
 
-        for (Creature c: a) {
+        drawCreature(a.getRambda(), g);
+        for (Chaser c: a) {
             drawCreature(c, g);
         }
     }

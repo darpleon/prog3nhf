@@ -4,7 +4,7 @@ import java.awt.Toolkit;
 
 public class GameLoop {
     private static final double UPS = 60.0;
-    private static final double FPS = 60.0;
+    //private static final double FPS = 60.0;
 
     private Arena a;
     private ArenaPanel ap;
@@ -20,8 +20,9 @@ public class GameLoop {
 
         long lastTime = System.nanoTime();
         final double uPeriod = 1000000000 / UPS;
-        final double fPeriod = 1000000000 / FPS;
-        double uProgress = 0, fProgress = 0;
+        //final double fPeriod = 1000000000 / FPS;
+        double uProgress = 0;
+        //double fProgress = 0;
 
         running = true;
         
@@ -29,7 +30,7 @@ public class GameLoop {
             
             long currentTime = System.nanoTime();
             uProgress += (currentTime - lastTime) / uPeriod;
-            fProgress += (currentTime - lastTime) / fPeriod;
+            //fProgress += (currentTime - lastTime) / fPeriod;
             lastTime = currentTime;
 
             if (uProgress >= 1) {
@@ -40,6 +41,10 @@ public class GameLoop {
             }
         }
 
+    }
+
+    public void stop() {
+        this.running = false;
     }
 
 }

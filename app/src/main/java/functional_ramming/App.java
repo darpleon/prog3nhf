@@ -12,19 +12,31 @@ public class App {
         GameFrame f = new GameFrame();
 
         Arena a = new Arena();
+
+        List<Double> values = new ArrayList<Double>();
+
+        for (int i = 0; i < 360; i++) {
+            values.add(i / 36.0);
+        }
+
+        Function function = new Function(values);
+
+        a.setFunction(function);
         
         Vector pos = new Vector(50, 250);
         Vector dir = new Vector(4.0 / 5.0, 3.0 / 5.0);
         double speed = 2;
         double size = 20;
 
-        Rambda r = new Rambda(pos, dir, size, 6);
+        Rambda r = new Rambda(pos, dir, size, 6, function);
         RambdaController rc = new RambdaController(r);
 
-        a.addCreature(r);
+        a.setRambda(r);
 
         Chaser c = new Chaser(pos, speed, size, r, new ArrayList<Creature>());
-        a.addCreature(c);
+        Chaser c2 = new Chaser(pos.add(new Vector(20,20)), 3, size, r, new ArrayList<Creature>());
+        a.addChaser(c);
+        a.addChaser(c2);
 
         ArenaPanel ap = new ArenaPanel(a);
         f.addKeyListener(rc);
