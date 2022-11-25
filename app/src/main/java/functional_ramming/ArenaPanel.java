@@ -6,11 +6,13 @@ import javax.swing.*;
 public class ArenaPanel extends JPanel {
 
     private final Arena a;
-    private final double aspectRatio;
+    //private final double aspectRatio;
 
     public ArenaPanel(Arena arena) {
         a = arena;
-        aspectRatio = a.WIDTH / a.HEIGHT;
+        this.setPreferredSize(new Dimension(1200, 900));
+        this.setMaximumSize(new Dimension(1200, 900));
+        //aspectRatio = Arena.WIDTH / Arena.HEIGHT;
     }
 
     @Override
@@ -18,8 +20,8 @@ public class ArenaPanel extends JPanel {
         setBackground(Color.GRAY);
         super.paintComponent(graphics);
         Graphics2D g = (Graphics2D) graphics;
-        g.setColor(Color.RED);
-        g.fillOval(100, 100, 100, 100);
+        //g.setColor(Color.RED);
+        //g.fillOval(100, 100, 100, 100);
 
         drawCreature(a.getRambda(), g);
         for (Chaser c: a) {

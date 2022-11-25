@@ -3,7 +3,7 @@ package functional_ramming;
 import java.util.*;
 
 public class Arena implements Iterable<Chaser> {
-    public static final double WIDTH = 1600;
+    public static final double WIDTH = 1200;
     public static final double HEIGHT = 900;
 
     private Function function;
@@ -32,6 +32,7 @@ public class Arena implements Iterable<Chaser> {
 
     public void setFunction(Function function) {
         this.function = function;
+        this.rambda.setFunction(function);
     }
 
     public void update() {

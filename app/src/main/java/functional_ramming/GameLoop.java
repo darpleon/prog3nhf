@@ -8,11 +8,13 @@ public class GameLoop {
 
     private Arena a;
     private ArenaPanel ap;
+    private FunctionPanel functionPanel;
     private boolean running;
 
-    public GameLoop(Arena arena, ArenaPanel arenaPanel) {
+    public GameLoop(Arena arena, ArenaPanel arenaPanel, FunctionPanel functionPanel) {
         a = arena;
         ap = arenaPanel;
+        this.functionPanel = functionPanel;
         running = false;
     }
 
@@ -36,6 +38,7 @@ public class GameLoop {
             if (uProgress >= 1) {
                 a.update();
                 ap.repaint();
+                this.functionPanel.repaint();
                 Toolkit.getDefaultToolkit().sync();
                 uProgress--;
             }

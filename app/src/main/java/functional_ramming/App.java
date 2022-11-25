@@ -9,34 +9,39 @@ import java.util.*;
 public class App {
 
     public static void main(String[] args) throws Exception {
-        GameFrame f = new GameFrame();
 
         Arena a = new Arena();
 
         List<Double> values = new ArrayList<Double>();
 
         for (int i = 0; i < 360; i++) {
-            values.add(i / 36.0);
+            double funcVal = 6 * (2 - Math.cos(i * 2 * Math.PI / 360.0));
+            //double funcVal = 25;
+            //double funcVal = i < 180 ? 5 : 25;
+            values.add(funcVal);
         }
 
         Function function = new Function(values);
 
-        a.setFunction(function);
         
         Vector pos = new Vector(50, 250);
-        Vector dir = new Vector(4.0 / 5.0, 3.0 / 5.0);
         double speed = 2;
         double size = 20;
 
-        Rambda r = new Rambda(pos, dir, size, 6, function);
+        Rambda r = new Rambda(pos, function);
         RambdaController rc = new RambdaController(r);
 
         a.setRambda(r);
+        a.setFunction(function);
 
         Chaser c = new Chaser(pos, speed, size, r, new ArrayList<Creature>());
-        Chaser c2 = new Chaser(pos.add(new Vector(20,20)), 3, size, r, new ArrayList<Creature>());
+        Chaser c2 = new Chaser(pos.add(new Vector(100,100)), 3, size, r, new ArrayList<Creature>());
         a.addChaser(c);
         a.addChaser(c2);
+
+        FunctionPanel functionPanel = new FunctionPanel(function);
+
+        GameFrame f = new GameFrame(functionPanel);
 
         ArenaPanel ap = new ArenaPanel(a);
         f.addKeyListener(rc);
@@ -46,7 +51,7 @@ public class App {
         f.pack();
         f.setVisible(true);
 
-        GameLoop gl = new GameLoop(a, ap);
+        GameLoop gl = new GameLoop(a, ap, functionPanel);
 
         gl.run();
         

@@ -1,15 +1,22 @@
 package functional_ramming;
 
 public class Rambda extends Creature {
+    private static final double ANGLE_DELTA = 6;
+    private static final double SIZE = 20;
+
     private TurnDir turnDir;
     private Vector turnDelta;
     private Function function;
     
-    public Rambda(Vector p, Vector d, double sz, double angleDelta , Function function) {
-        super(p, d, 0, sz);
-        double angleDeltaRad = Math.toRadians(angleDelta);
-        turnDelta = new Vector(Math.cos(angleDeltaRad), Math.sin(angleDeltaRad));
-        turnDir = TurnDir.NONE;
+    public Rambda(Vector spawnPos, Function function) {
+        super(spawnPos, 0, SIZE);
+        double angleDeltaRad = Math.toRadians(ANGLE_DELTA);
+        this.turnDelta = new Vector(Math.cos(angleDeltaRad), Math.sin(angleDeltaRad));
+        this.turnDir = TurnDir.NONE;
+        this.function = function;
+    }
+
+    public void setFunction(Function function) {
         this.function = function;
     }
     

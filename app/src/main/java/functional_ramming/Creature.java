@@ -2,19 +2,16 @@ package functional_ramming;
 
 public class Creature {
     //private Arena a;
+    protected final double size;
 
     protected Vector pos;
     protected Vector dir;
     protected double speed;
-    protected double size;
 
-    public Creature() {
 
-    }
-
-    public Creature(Vector pos, Vector dir, double speed, double size) {
-        this.pos = pos;
-        this.dir = dir;
+    public Creature(Vector spawnPos, double speed, double size) {
+        this.pos = spawnPos;
+        this.dir = new Vector(1,0);
         this.speed = speed;
         this.size = size;
     }
