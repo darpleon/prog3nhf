@@ -1,25 +1,30 @@
 package functional_ramming;
 
 public class Rambda extends Creature {
-    private static final double ANGLE_DELTA = 6;
-    private static final double SIZE = 20;
+    private static final double ANGLE_DELTA = 9;
+    private static final double SIZE = 30;
 
-    private TurnDir turnDir;
+    private final Game game;
     private Vector turnDelta;
     private Function function;
-    
-    public Rambda(Vector spawnPos, Function function) {
+
+    private double health;
+    private TurnDir turnDir;
+
+    public Rambda(Game game, Vector spawnPos, Function function) {
         super(spawnPos, 0, SIZE);
+        this.game = game;
         double angleDeltaRad = Math.toRadians(ANGLE_DELTA);
         this.turnDelta = new Vector(Math.cos(angleDeltaRad), Math.sin(angleDeltaRad));
         this.turnDir = TurnDir.NONE;
         this.function = function;
+        this.health = 100.0;
     }
 
     public void setFunction(Function function) {
         this.function = function;
     }
-    
+
     public void setTurnDir(TurnDir td) {
         turnDir = td;
     }
@@ -34,8 +39,7 @@ public class Rambda extends Creature {
             if (turnDir == TurnDir.LEFT) {
                 newX = dir.dotProduct(turnDelta);
                 newY = dir.dotProduct(turnDelta.flip().swap());
-            }
-            else if (turnDir == TurnDir.RIGHT) {
+            } else if (turnDir == TurnDir.RIGHT) {
                 newX = dir.dotProduct(turnDelta.flip());
                 newY = dir.dotProduct(turnDelta.swap());
             }
@@ -43,6 +47,16 @@ public class Rambda extends Creature {
         }
 
         super.step();
+    }
+
+    public void hit() {
+        this.health -= 100.0 * Math.pow(2.0, - this.speed / 5.0);
+        //this.health -= 100;
+        if (this.health <= 0) {
+            this.health = 0;
+            this.alive = false;
+            game.gameLost();
+        }
     }
 
 }

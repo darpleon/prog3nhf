@@ -9,7 +9,7 @@ public class FunctionPanel extends JPanel {
     public FunctionPanel(Function function) {
         this.function = function;
         this.setPreferredSize(new Dimension(360, 360));
-        this.setMaximumSize(new Dimension(360, 360));
+        //this.setMaximumSize(new Dimension(360, 360));
     }
 
     @Override

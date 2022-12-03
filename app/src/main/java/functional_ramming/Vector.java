@@ -42,6 +42,10 @@ public class Vector {
         return new Vector(this.x - v.x, this.y - v.y);
     }
 
+    public double distance(Vector v) {
+        return v.subtract(this).magnitude();
+    }
+
     public Vector scale(double m) {
         return new Vector(x * m, y * m);
     }

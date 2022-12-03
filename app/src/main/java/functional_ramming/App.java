@@ -4,56 +4,61 @@
 package functional_ramming;
 
 import java.awt.BorderLayout;
+import java.awt.event.KeyEvent;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class App {
 
     public static void main(String[] args) throws Exception {
 
-        Arena a = new Arena();
+        Game game = new Game();
 
         List<Double> values = new ArrayList<Double>();
 
         for (int i = 0; i < 360; i++) {
             double funcVal = 6 * (2 - Math.cos(i * 2 * Math.PI / 360.0));
-            //double funcVal = 25;
-            //double funcVal = i < 180 ? 5 : 25;
+            // double funcVal = 25;
+            // double funcVal = i < 180 ? 5 : 30;
             values.add(funcVal);
         }
 
         Function function = new Function(values);
 
-        
         Vector pos = new Vector(50, 250);
         double speed = 2;
         double size = 20;
 
-        Rambda r = new Rambda(pos, function);
+        Rambda r = new Rambda(game, pos, function);
         RambdaController rc = new RambdaController(r);
 
-        a.setRambda(r);
-        a.setFunction(function);
+        game.setRambda(r);
+        game.setFunction(function);
 
-        Chaser c = new Chaser(pos, speed, size, r, new ArrayList<Creature>());
-        Chaser c2 = new Chaser(pos.add(new Vector(100,100)), 3, size, r, new ArrayList<Creature>());
-        a.addChaser(c);
-        a.addChaser(c2);
+        Chaser c = new Chaser(pos.add(new Vector(150, 150)), speed, size, r, new ArrayList<Creature>());
+        Chaser c2 = new Chaser(pos.add(new Vector(100, 100)), 3, size, r, new ArrayList<Creature>());
+        game.addChaser(c);
+        game.addChaser(c2);
 
         FunctionPanel functionPanel = new FunctionPanel(function);
 
-        GameFrame f = new GameFrame(functionPanel);
+        GameFrame f = new GameFrame(game, functionPanel);
 
-        ArenaPanel ap = new ArenaPanel(a);
-        f.addKeyListener(rc);
+        ArenaPanel arenaPanel = new ArenaPanel(game);
+        //f.addKeyListener(rc);
 
-        f.add(ap, BorderLayout.CENTER); 
+        f.add(arenaPanel, BorderLayout.CENTER);
+
+        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+        manager.addKeyEventDispatcher(rc);
 
         f.pack();
         f.setVisible(true);
 
-        GameLoop gl = new GameLoop(a, ap, functionPanel);
+        GameLoop gl = new GameLoop(game, arenaPanel, functionPanel);
 
         gl.run();
-        
+
     }
 }
