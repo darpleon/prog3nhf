@@ -37,6 +37,10 @@ public class Game implements Iterable<Chaser> {
         chasers.add(chaser);
     }
 
+    public Function getFunction() {
+        return this.function;
+    }
+
     public void setFunction(Function function) {
         this.function = function;
         this.rambda.setFunction(function);
@@ -44,7 +48,7 @@ public class Game implements Iterable<Chaser> {
 
     public void update() {
         rambda.step();
-        for (Chaser c: chasers) {
+        for (Chaser c : chasers) {
             c.step();
         }
         function.step();

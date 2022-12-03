@@ -31,7 +31,6 @@ public class App {
         double size = 20;
 
         Rambda r = new Rambda(game, pos, function);
-        RambdaController rc = new RambdaController(r);
 
         game.setRambda(r);
         game.setFunction(function);
@@ -41,22 +40,9 @@ public class App {
         game.addChaser(c);
         game.addChaser(c2);
 
-        FunctionPanel functionPanel = new FunctionPanel(function);
+        GameFrame gameFrame = new GameFrame(game);
 
-        GameFrame f = new GameFrame(game, functionPanel);
-
-        ArenaPanel arenaPanel = new ArenaPanel(game);
-        //f.addKeyListener(rc);
-
-        f.add(arenaPanel, BorderLayout.CENTER);
-
-        KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-        manager.addKeyEventDispatcher(rc);
-
-        f.pack();
-        f.setVisible(true);
-
-        GameLoop gl = new GameLoop(game, arenaPanel, functionPanel);
+        GameLoop gl = new GameLoop(game, gameFrame);
 
         gl.run();
 
