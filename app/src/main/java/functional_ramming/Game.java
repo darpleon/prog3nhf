@@ -3,8 +3,8 @@ package functional_ramming;
 import java.util.*;
 
 public class Game implements Iterable<Chaser> {
-    public static final double WIDTH = 1200;
-    public static final double HEIGHT = 900;
+    public static final int ARENA_WIDTH = 1200;
+    public static final int ARENA_HEIGHT = 900;
 
     private Function function;
     private Rambda rambda;

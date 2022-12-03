@@ -16,8 +16,9 @@ public class ArenaPanel extends JPanel {
     private List<CreatureView> chaserViews;
 
     public ArenaPanel(Game game) {
-        this.setPreferredSize(new Dimension(1200, 900));
-        this.setMaximumSize(new Dimension(1200, 900));
+        Dimension panelSize = new Dimension(Game.ARENA_WIDTH, Game.ARENA_HEIGHT);
+        this.setPreferredSize(panelSize);
+        this.setMaximumSize(panelSize);
 
         this.game = game;
         this.rambdaView = new CreatureView(this.game.getRambda(), RAMBDA_BODY_COLOR);

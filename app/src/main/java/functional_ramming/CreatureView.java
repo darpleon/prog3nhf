@@ -3,6 +3,8 @@ package functional_ramming;
 import java.awt.*;
 
 public class CreatureView {
+    private static final Color EYE_COLOR = Color.RED;
+
     private Creature creature;
     private Color color;
 
@@ -26,7 +28,7 @@ public class CreatureView {
             int ny = y + (int) (this.creature.getDir().getY() * s / 2.0);
             int ns = s / 3;
 
-            g.setColor(Color.RED);
+            g.setColor(CreatureView.EYE_COLOR);
             g.fillOval(nx - ns, ny - ns, 2 * ns, 2 * ns);
         }
         else {

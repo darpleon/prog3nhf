@@ -38,10 +38,10 @@ public class Creature {
         Vector step = this.dir.scale(speed);
         Vector newPos = this.pos.add(step);
 
-        if (newPos.getX() + this.size > Game.WIDTH || newPos.getX() - this.size < 0) {
+        if (newPos.getX() + this.size > Game.ARENA_WIDTH || newPos.getX() - this.size < 0) {
             this.dir.setX(-this.dir.getX());
         }
-        if (newPos.getY() + this.size > Game.HEIGHT || newPos.getY() - this.size < 0) {
+        if (newPos.getY() + this.size > Game.ARENA_HEIGHT || newPos.getY() - this.size < 0) {
             this.dir.setY(-this.dir.getY());
         }
         step = this.dir.scale(speed);
