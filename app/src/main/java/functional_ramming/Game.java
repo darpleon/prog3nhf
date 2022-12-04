@@ -5,6 +5,7 @@ import java.util.*;
 public class Game implements Iterable<Chaser> {
     public static final int ARENA_WIDTH = 1200;
     public static final int ARENA_HEIGHT = 900;
+    public static final Vector RAMBDA_SPAWN_POS = new Vector(ARENA_WIDTH / 2, ARENA_HEIGHT / 2);
 
     private Function function;
     private Rambda rambda;
@@ -12,13 +13,13 @@ public class Game implements Iterable<Chaser> {
 
     private boolean running;
 
-    public Iterator<Chaser> iterator() {
-        return chasers.iterator();
-    }
-
     public Game() {
         this.chasers = new ArrayList<Chaser>();
         this.running = true;
+    }
+
+    public Iterator<Chaser> iterator() {
+        return chasers.iterator();
     }
 
     public boolean isRunning() {
@@ -31,6 +32,10 @@ public class Game implements Iterable<Chaser> {
 
     public Rambda getRambda() {
         return this.rambda;
+    }
+
+    public int getRambdaHealth() {
+        return this.rambda.getHealth();
     }
 
     public void addChaser(Chaser chaser) {

@@ -19,7 +19,7 @@ public class App {
 
         for (int i = 0; i < 360; i++) {
             double funcVal = 6 * (2 - Math.cos(i * 2 * Math.PI / 360.0));
-            // double funcVal = 25;
+            // double funcVal = 2;
             // double funcVal = i < 180 ? 5 : 30;
             values.add(funcVal);
         }

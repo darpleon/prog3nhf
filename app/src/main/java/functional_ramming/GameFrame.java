@@ -13,6 +13,7 @@ public class GameFrame extends JFrame {
     public GameFrame(Game game) {
         this.setTitle("Functional Ramming");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setPreferredSize(new Dimension(1560, 900));
         this.setResizable(false);
 
         this.game = game;

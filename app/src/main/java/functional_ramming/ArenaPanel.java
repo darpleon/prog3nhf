@@ -17,7 +17,9 @@ public class ArenaPanel extends JPanel {
 
     public ArenaPanel(Game game) {
         Dimension panelSize = new Dimension(Game.ARENA_WIDTH, Game.ARENA_HEIGHT);
+        this.setSize(panelSize);
         this.setPreferredSize(panelSize);
+        this.setMinimumSize(panelSize);
         this.setMaximumSize(panelSize);
 
         this.game = game;
@@ -43,6 +45,9 @@ public class ArenaPanel extends JPanel {
             v.draw(g);
         }
         rambdaView.draw(g);
+
+        g.setStroke(new BasicStroke(3));
+        g.drawLine(0, Game.ARENA_HEIGHT, Game.ARENA_WIDTH - 1, Game.ARENA_HEIGHT);
     }
 
     public void drawCreature(Creature c, Graphics2D g) {

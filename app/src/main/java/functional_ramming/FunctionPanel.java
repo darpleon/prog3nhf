@@ -31,11 +31,11 @@ public class FunctionPanel extends JPanel {
         int height = Function.DATA_COUNT - TOP_PADDING - BOTTOM_PADDING;
 
         graphics2d.setColor(Color.RED);
+        graphics2d.setStroke(new BasicStroke(3));
         
         for (int i = 0; i < Function.DATA_COUNT; i++) {
             double scalingFactor = height / this.function.getMaxValue();
             int yCoord = bottomY - (int) (scalingFactor * this.function.getValueAtIndex(i));
-            graphics2d.setStroke(new BasicStroke(3));
             graphics2d.drawLine(i, yCoord, i, yCoord);
         }
     }

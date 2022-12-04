@@ -1,7 +1,7 @@
 package functional_ramming;
 
 public class Rambda extends Creature {
-    private static final double ANGLE_DELTA = 9;
+    private static final double ANGLE_DELTA = 7;
     private static final double SIZE = 30;
 
     private final Game game;
@@ -27,6 +27,10 @@ public class Rambda extends Creature {
 
     public void setTurnDir(TurnDir td) {
         turnDir = td;
+    }
+
+    public int getHealth() {
+        return (int) health;
     }
 
     @Override
