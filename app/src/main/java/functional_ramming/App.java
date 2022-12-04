@@ -11,32 +11,51 @@ import java.util.List;
 
 public class App {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-        Game game = new Game();
 
-        List<Double> values = new ArrayList<Double>();
+        List<Double> values0 = new ArrayList<Double>();
+
+        for (int i = 0; i < 360; i++) {
+            // double funcVal = 6 * (2 - Math.cos(i * 2 * Math.PI / 360.0));
+            double funcVal = 2;
+            // double funcVal = i < 180 ? 5 : 30;
+            values0.add(funcVal);
+        }
+
+        List<Double> values1 = new ArrayList<Double>();
+
+        Function func0 = new Function("func0", values0);
 
         for (int i = 0; i < 360; i++) {
             double funcVal = 6 * (2 - Math.cos(i * 2 * Math.PI / 360.0));
             // double funcVal = 2;
             // double funcVal = i < 180 ? 5 : 30;
-            values.add(funcVal);
+            values1.add(funcVal);
         }
 
-        Function function = new Function(values);
+        Function func1 = new Function("func1", values1);
+
+        List<Function> functions = new ArrayList<Function>();
+        functions.add(func0);
+        functions.add(func1);
+        FunctionCollection functionCollection = new FunctionCollection(functions);
+
+        Game game = new Game(functionCollection);
 
         Vector pos = new Vector(50, 250);
         double speed = 2;
         double size = 20;
 
-        Rambda r = new Rambda(game, pos, function);
+        // Rambda r = new Rambda(game, pos, function);
 
-        game.setRambda(r);
-        game.setFunction(function);
+        // game.setRambda(r);
+        // game.setFunction(function);
 
-        Chaser c = new Chaser(pos.add(new Vector(150, 150)), speed, size, r, new ArrayList<Creature>());
-        Chaser c2 = new Chaser(pos.add(new Vector(100, 100)), 3, size, r, new ArrayList<Creature>());
+        Chaser c = new Chaser(pos.add(new Vector(150, 150)), speed, size,
+                game.getRambda(), 2);
+        Chaser c2 = new Chaser(pos.add(new Vector(150, 150)), 5, size,
+                game.getRambda(), 5);
         game.addChaser(c);
         game.addChaser(c2);
 
@@ -44,7 +63,10 @@ public class App {
 
         GameLoop gl = new GameLoop(game, gameFrame);
 
-        gl.run();
+        while (true) {
+            gl.run();
+            gameFrame.repaint();
+        }
 
     }
 }

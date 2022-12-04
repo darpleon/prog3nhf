@@ -15,6 +15,10 @@ public class FunctionPanel extends JPanel {
         //this.setMaximumSize(new Dimension(360, 360));
     }
 
+    public void setFunction(Function function) {
+        this.function = function;
+    }
+
     @Override
     public void paintComponent(Graphics graphics) {
         Graphics2D graphics2d = (Graphics2D) graphics;

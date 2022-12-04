@@ -13,13 +13,13 @@ public class GameFrame extends JFrame {
     public GameFrame(Game game) {
         this.setTitle("Functional Ramming");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(1560, 900));
+        this.setSize(new Dimension(1560, 900));
         this.setResizable(false);
 
         this.game = game;
         this.arenaPanel = new ArenaPanel(this.game);
         this.functionPanel = new FunctionPanel(this.game.getFunction());
-        this.menuPanel = new MenuPanel(game);
+        this.menuPanel = new MenuPanel(game, functionPanel);
 
         JPanel sidePanel = new JPanel();
         sidePanel.setLayout(new BorderLayout());

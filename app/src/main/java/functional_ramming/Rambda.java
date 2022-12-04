@@ -54,13 +54,21 @@ public class Rambda extends Creature {
     }
 
     public void hit() {
-        this.health -= 100.0 * Math.pow(2.0, - this.speed / 5.0);
+        this.health -= 100.0 * Math.pow(2.0, - this.speed / 4.0);
+        game.incrementTally();
         //this.health -= 100;
         if (this.health <= 0) {
             this.health = 0;
             this.alive = false;
             game.gameLost();
         }
+    }
+
+    public void reset() {
+        this.health = 100;
+        this.pos = this.spawnPos;
+        this.dir = new Vector(1, 0);
+        this.alive = true;
     }
 
 }

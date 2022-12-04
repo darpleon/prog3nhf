@@ -11,15 +11,16 @@ public class GameLoop {
 
     public GameLoop(Game game, GameFrame gameFrame) {
         this.game = game;
+        game.setGameLoop(this);
         this.gameFrame = gameFrame;
 
         // this.running = false;
     }
 
-    public void run() {
+    public void run() { 
 
         long lastTime = System.nanoTime();
-        final double uPeriod = 1000000000 / UPS;
+        double uPeriod = 1000000000 / UPS;
 
         double uProgress = 0;
 

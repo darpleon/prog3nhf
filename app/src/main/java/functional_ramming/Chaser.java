@@ -6,14 +6,27 @@ public class Chaser extends Creature {
     private Rambda target;
     private List<Creature> toAvoid;
 
-    public Chaser(Vector pos, double speed, double size, Rambda target, List<Creature> toAvoid) {
+    private final double spawnDelay;
+    private double spawnTimer;
+
+    public Chaser(Vector pos, double speed, double size, Rambda target, double waitTime) {
         super(pos, speed, size);
+        this.spawnDelay = waitTime;
+        this.spawnTimer = this.spawnDelay;
         this.target = target;
-        this.toAvoid = toAvoid;
+        this.alive = false;
+        // this.toAvoid = toAvoid;
     }
 
     @Override
     public void step() {
+        if (spawnTimer > 0) {
+            spawnTimer -= 1 / 60.0;
+            if (spawnTimer <= 0) {
+                this.alive = true;
+            }
+        }
+
         if (!this.alive) {
             return;
         }
@@ -26,5 +39,11 @@ public class Chaser extends Creature {
             this.target.hit();
             this.alive = false;
         }
+    }
+
+    public void reset() {
+        this.alive = false;
+        this.spawnTimer = spawnDelay;
+        this.pos = this.spawnPos;
     }
 }

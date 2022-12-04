@@ -38,16 +38,20 @@ public class ArenaPanel extends JPanel {
         setBackground(Color.GRAY);
         super.paintComponent(graphics);
         Graphics2D g = (Graphics2D) graphics;
-        // g.setColor(Color.RED);
-        // g.fillOval(100, 100, 100, 100);
+        g.setColor(Color.GRAY);
+        g.fillRect(0, 0, Game.ARENA_WIDTH, Game.ARENA_HEIGHT);
 
         for (CreatureView v : this.chaserViews) {
             v.draw(g);
         }
         rambdaView.draw(g);
 
+        g.setColor(Color.BLACK);
         g.setStroke(new BasicStroke(3));
         g.drawLine(0, Game.ARENA_HEIGHT, Game.ARENA_WIDTH - 1, Game.ARENA_HEIGHT);
+        // g.drawLine(0, 1, Game.ARENA_WIDTH - 1, 1);
+        g.drawLine(Game.ARENA_WIDTH, 0, Game.ARENA_WIDTH, Game.ARENA_HEIGHT - 1);
+        // g.drawLine(1, 0, 1, Game.ARENA_HEIGHT - 1);
     }
 
     public void drawCreature(Creature c, Graphics2D g) {

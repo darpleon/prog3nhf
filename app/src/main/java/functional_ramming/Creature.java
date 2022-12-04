@@ -2,6 +2,7 @@ package functional_ramming;
 
 public class Creature {
     // private Arena a;
+    protected final Vector spawnPos;
     protected final double size;
 
     protected boolean alive;
@@ -11,7 +12,8 @@ public class Creature {
     protected double speed;
 
     public Creature(Vector spawnPos, double speed, double size) {
-        this.pos = spawnPos;
+        this.spawnPos = spawnPos;
+        this.pos = this.spawnPos;
         this.dir = new Vector(1, 0);
         this.speed = speed;
         this.size = size;
@@ -35,6 +37,8 @@ public class Creature {
     }
 
     public void step() {
+        if (!this.alive) return;
+
         Vector step = this.dir.scale(speed);
         Vector newPos = this.pos.add(step);
 
