@@ -30,6 +30,7 @@ public class MenuPanel extends JPanel {
         this.add(healthPanel);
 
         functionBox = new JComboBox<Function>();
+        functionBox.setFocusable(false);
         for (Function f : game.getFunctionCollection()) {
             functionBox.addItem(f);
         }
@@ -47,8 +48,10 @@ public class MenuPanel extends JPanel {
         this.add(fBoxPanel);
 
         JButton resetButton =  new JButton("Reset");
+        resetButton.setFocusable(false);
         resetButton.addActionListener(a -> this.game.reset());
         JButton startButton = new JButton("Start");
+        startButton.setFocusable(false);
         startButton.addActionListener(a -> this.game.start());
 
         JPanel controlPanel = new JPanel();

@@ -3,13 +3,15 @@ package functional_ramming;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class RambdaController implements KeyEventDispatcher {
+public class KeyHandler implements KeyEventDispatcher {
+    private Game game;
     private Rambda r;
     boolean leftPressed;
     boolean rightPressed;
 
-    public RambdaController(Rambda rambda) {
-        r = rambda;
+    public KeyHandler(Game game) {
+        this.game = game;
+        r = this.game.getRambda();
         leftPressed = false;
         rightPressed = false;
     }
@@ -33,6 +35,10 @@ public class RambdaController implements KeyEventDispatcher {
                         else
                             r.setTurnDir(TurnDir.NONE);
                         break;
+                    case KeyEvent.VK_SPACE:
+                        game.toggleRun();
+                        break;
+
                 }
                 break;
             case KeyEvent.KEY_RELEASED:

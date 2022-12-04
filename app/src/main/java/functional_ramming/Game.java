@@ -25,7 +25,7 @@ public class Game implements Iterable<Chaser> {
         this.function = functionCollection.get(0);
         this.rambda = new Rambda(this, new Vector(500, 300), this.function);
         this.chasers = new ArrayList<Chaser>();
-        this.running = true;
+        this.running = false;
         this.started = false;
         this.killTally = 0;
     }
@@ -97,13 +97,23 @@ public class Game implements Iterable<Chaser> {
         for (Chaser c : chasers) {
             c.reset();
         }
-        this.running = true;
+        this.running = false;
         this.started = false;
         System.out.println(this.rambda.getPos());
     }
 
     public void start() {
+        this.running = true;
         this.started = true;
+    }
+
+    public void toggleRun() {
+        if (!this.running) {
+            this.running = true;
+        }
+        else {
+            this.running = false;
+        }
     }
 
     public void setGameLoop(GameLoop gameLoop) {

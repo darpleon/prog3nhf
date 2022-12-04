@@ -30,7 +30,7 @@ public class GameFrame extends JFrame {
         this.add(sidePanel, BorderLayout.EAST);
 
         KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-        manager.addKeyEventDispatcher(new RambdaController(game.getRambda()));
+        manager.addKeyEventDispatcher(new KeyHandler(game));
 
         this.setVisible(true);
         this.pack();
