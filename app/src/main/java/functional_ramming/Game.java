@@ -9,29 +9,42 @@ public class Game implements Iterable<Chaser> {
 
     private GameLoop gameLoop;
 
+    private Rambda rambda;
+
     private FunctionCollection functionCollection;
+    private List<Level> levels;
 
     private Function function;
-    private Rambda rambda;
-    private List<Chaser> chasers;
+    private Level level;
+    // private List<Chaser> chasers;
 
     private int killTally;
 
     private boolean running;
     private boolean started;
 
-    public Game(FunctionCollection functionCollection) {
+    public Game(FunctionCollection functionCollection, List<Level> levels) {
         this.functionCollection = functionCollection;
-        this.function = functionCollection.get(0);
+        this.levels = levels;
+
         this.rambda = new Rambda(this, new Vector(500, 300), this.function);
-        this.chasers = new ArrayList<Chaser>();
+
+        for (Level l : levels) {
+            l.setTarget(this.rambda);
+        }
+
+        this.function = functionCollection.get(0);
+        this.level = this.levels.get(0);
+        this.rambda.setFunction(this.function);
+
+        // this.chasers = new ArrayList<Chaser>();
         this.running = false;
         this.started = false;
         this.killTally = 0;
     }
 
     public Iterator<Chaser> iterator() {
-        return chasers.iterator();
+        return level.iterator();
     }
 
     public FunctionCollection getFunctionCollection() {
@@ -54,9 +67,9 @@ public class Game implements Iterable<Chaser> {
         return this.rambda.getHealth();
     }
 
-    public void addChaser(Chaser chaser) {
-        chasers.add(chaser);
-    }
+    // public void addChaser(Chaser chaser) {
+    //     chasers.add(chaser);
+    // }
 
     public Function getFunction() {
         return this.function;
@@ -73,15 +86,13 @@ public class Game implements Iterable<Chaser> {
         rambda.step();
         function.step();
         if (this.started) {
-            for (Chaser c : chasers) {
-                c.step();
-            }
+            level.step();
         }
     }
 
     public void incrementTally() {
         killTally += 1;
-        if (killTally == chasers.size()) {
+        if (this.killTally == this.level.chaserCount()) {
             this.running = false;
         }
     }
@@ -94,9 +105,7 @@ public class Game implements Iterable<Chaser> {
         System.out.println(this.rambda.getPos());
         this.rambda.reset();
         this.function.reset();
-        for (Chaser c : chasers) {
-            c.reset();
-        }
+        this.level.reset();
         this.running = false;
         this.started = false;
         System.out.println(this.rambda.getPos());

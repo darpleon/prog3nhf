@@ -4,10 +4,7 @@
 package functional_ramming;
 
 import java.awt.BorderLayout;
-import java.awt.event.KeyEvent;
-import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class App {
 
@@ -17,47 +14,52 @@ public class App {
         List<Double> values0 = new ArrayList<Double>();
 
         for (int i = 0; i < 360; i++) {
-            // double funcVal = 6 * (2 - Math.cos(i * 2 * Math.PI / 360.0));
-            double funcVal = 2;
-            // double funcVal = i < 180 ? 5 : 30;
+            double funcVal = 10;
             values0.add(funcVal);
         }
 
         List<Double> values1 = new ArrayList<Double>();
 
-        Function func0 = new Function("func0", values0);
+        Function func0 = new Function("constant", values0);
 
         for (int i = 0; i < 360; i++) {
             double funcVal = 6 * (2 - Math.cos(i * 2 * Math.PI / 360.0));
-            // double funcVal = 2;
-            // double funcVal = i < 180 ? 5 : 30;
             values1.add(funcVal);
         }
 
-        Function func1 = new Function("func1", values1);
+        Function func1 = new Function("wave", values1);
 
-        List<Function> functions = new ArrayList<Function>();
-        functions.add(func0);
-        functions.add(func1);
-        FunctionCollection functionCollection = new FunctionCollection(functions);
+        List<Double> values2 = new ArrayList<Double>();
 
-        Game game = new Game(functionCollection);
+        for (int i = 0; i < 360; i++) {
+            double funcVal = 30.0 * Math.exp( - (i / 30.0 - 6) * (i / 30.0 - 6) ) + 5;
+            values2.add(funcVal);
+        }
+        
+        Function func2 = new Function("impulse", values2);
 
-        Vector pos = new Vector(50, 250);
-        double speed = 2;
-        double size = 20;
+        FunctionCollection functionCollection = new FunctionCollection();
+        functionCollection.add(func0);
+        functionCollection.add(func1);
+        functionCollection.add(func2);
 
-        // Rambda r = new Rambda(game, pos, function);
 
-        // game.setRambda(r);
-        // game.setFunction(function);
+        Vector pos0 = new Vector(50, 50);
+        double speed0 = 2;
+        double size0 = 20;
 
-        Chaser c = new Chaser(pos.add(new Vector(150, 150)), speed, size,
-                game.getRambda(), 2);
-        Chaser c2 = new Chaser(pos.add(new Vector(150, 150)), 5, size,
-                game.getRambda(), 5);
-        game.addChaser(c);
-        game.addChaser(c2);
+        Level level0 = new Level("0");
+
+        level0.add(new Chaser(pos0, speed0, size0, 1));
+        level0.add(new Chaser(pos0, speed0, size0, 2));
+        level0.add(new Chaser(pos0, speed0, size0, 3));
+        level0.add(new Chaser(pos0, speed0, size0, 4));
+        level0.add(new Chaser(pos0, speed0, size0, 5));
+
+        List<Level> levels = new ArrayList<Level>();
+        levels.add(level0);
+
+        Game game = new Game(functionCollection, levels);
 
         GameFrame gameFrame = new GameFrame(game);
 

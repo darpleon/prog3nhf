@@ -4,18 +4,22 @@ import java.util.*;
 
 public class Chaser extends Creature {
     private Rambda target;
-    private List<Creature> toAvoid;
+    // private List<Creature> toAvoid;
 
     private final double spawnDelay;
     private double spawnTimer;
 
-    public Chaser(Vector pos, double speed, double size, Rambda target, double waitTime) {
-        super(pos, speed, size);
+    public Chaser(Vector spawnPos, double speed, double size, double waitTime) {
+        super(spawnPos, speed, size);
         this.spawnDelay = waitTime;
         this.spawnTimer = this.spawnDelay;
-        this.target = target;
         this.alive = false;
+        this.target = null;
         // this.toAvoid = toAvoid;
+    }
+
+    public void setTarget(Rambda target) {
+        this.target = target;
     }
 
     @Override
